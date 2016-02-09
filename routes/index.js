@@ -1,3 +1,5 @@
+//Checking to see if this project is being pushed to the correct repository
+
 var express = require('express');
 var stormpath = require('express-stormpath'); //REQUIRE STORMPATH
 var router = express.Router();
