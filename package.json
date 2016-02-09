@@ -1,6 +1,9 @@
 {
   "name": "maptest",
   "version": "0.0.0",
+  "engines": {
+    "node": "0.12.7"
+  },
   "private": true,
   "scripts": {
     "start": "STORMPATH_URL=https://api.stormpath.com/v1/applications/oW9jvUhRi4c3QUM6h5mhX node ./bin/www"
