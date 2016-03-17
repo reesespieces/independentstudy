@@ -59,6 +59,9 @@ app.use('/markers', markers);
 app.use('/itinerary', routes);
 app.use('search', routes); //ROUTE FOR SEARCH IS IN INDEX.JS
 
+//app.use('/submit', routes); //ROUTE FOR SUBMITTING
+
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
