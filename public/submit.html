@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <link rel="shortcut icon" href="http://convertico.com/images/55d379bacba01/icon2.png"/>
+
+    <title>MapOurTours</title>
+    <!-- Our created js and css files-->
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="/javascripts/home.js"></script>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/search.css">
+    <!-- Compiled and minified CSS-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
+    <!-- Compiled and minified JavaScript-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
+    <style>
+      .parallax-container {
+      height: "90px";
+      }
+    </style>
+    <script>
+      $(document).ready(function(){
+      $('.parallax').parallax();
+      });
+    </script>
+  </head>
+  <body>
+    <!-- CREATING NAV BAR-->
+    <nav>
+      <div class="nav-wrapper cyan"><a href="/" style="padding-left:30px;"><img src="images/finalprojecticon1.png" alt="backpack" style="height:60px; width:60px;" class="circle responsive-img"></a><a href="/" style="padding-left:30px;" class="brand-logo">MapOurTours</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><a href="/search">Log In</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div>
+
+
+<!--
+- UNIVERSITY
+- LATITUDE
+- LONGITUDE
+- DESCRIPTION
+- DATES:
+    - DATE
+    - TIMES:
+         -
+- URL
+- AVAILABLE SPOTS
+-->
+      <form action="/adddata" method="post"> <!-- CREATE THE FORM FOR SIGNING UP -->
+        <div class="row">
+          <form class="col s12">
+            <div class="row">
+              <div class="input-field col s12">
+                <!-- UNIVERSITY NAME FORM -->
+                <input id="name" name="name" type="text" class="validate">
+                <label for="name">University or College</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s6">
+                <!-- LATITUDE FORM -->
+                <input id="latitude" name="latitude" type="text" class="validate">
+                <label for="latitude">Latitude</label>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="input-field col s12">
+                <!-- DESCRIPTION FORM -->
+                <input id="description" name="description" type="text" class="validate">
+                <label for="description">Description</label>
+              </div>
+            </div>
+
+            <div class="row">
+              <!-- DATE FORM -->
+              <div class="input-field col s6">
+                <input id="date" name="date" type="text" class="validate">
+                <label for="date">Date</label>
+              </div>
+              <div class="input-field col s6">
+                <!-- TIMES VALIDATION -->
+                <input id="times" name="times" type="text" class="validate">
+                <label for="times">Times</label>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="input-field col s12">
+                <input id="url" name="url" type="text" class="validate">
+                <label for="url">URL</label>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="input-field col s12">
+                <!-- AVAILABLE SPOTS FORM -->
+                <input id="availableSpots" name="availableSpots" type="text" class="validate">
+                <label for="availableSpots">Available Spots</label>
+              </div>
+            </div>
+        </div>
+      </form>
+
+
+    </div>
+
+    <center><img src="/images/icon3.png"></center><br><br>
+  </body>
+  <!-- FOOTER-->
+  <footer class="page-footer cyan">
+    <div class="container white-text valign">
+      <div class="row">
+        <div class="col l3 m3">
+          <center><a href="https://twitter.com/MapYourTour" class="grey-text text-lighten-3"><img style="width:32px; height:32px;" src="/images/twitter.png"></a></center>
+        </div>
+        <div class="col l3 m3">
+          <center><a href="/" class="grey-text text-lighten-3"><img style="width:32px; height:32px;" src="/images/fb.png"></a></center>
+        </div>
+        <div class="col l3 m3">
+          <center><a href="https://instagram.com/mapourtours/" class="grey-text text-lighten-3"><img style="width:32px; height:32px;" src="/images/insta.png"></a></center>
+        </div>
+        <div class="col l3 m3">
+          <center><a href="/" class="grey-text text-lighten-3"><img class="circle responsive-img" style="width:32px; height:32px;" src="/images/gitCat.jpg"></a></center>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">© 2015 Copyright MapOurTours<a href="/" class="grey-text text-lighten-4 right">Home</a></div>
+    </div>
+  </footer>
+</html>
