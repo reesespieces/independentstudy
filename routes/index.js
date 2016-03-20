@@ -57,6 +57,22 @@ router.post('/itinerary', function(req, res){
 })
 });
 
+app.post('/submit', function(req, res) {
+    req.body['name'] = req.body.name;
+    console.log("Submit req.body: " + req.body);
+    MongoClient.connect(url, function(err, db) { //MONGO CLIENT IS CONNECTING TO THE URL -- TWO POSSIBLE OUTCOMES: ERROR OR THE DB
+     assert.equal(null, err); //ERROR MUST BE NULL FOR THE PROGRAM TO CONTINUE
+     insertDocument(db, req.body, function(result) { //CALLING ON THE INSERTDOCUMENT FUNCTION WE DEFINED BEFORE
+       //RECORD IS CALLED REQ.BODY IN THE LINE ABOVE
+         db.close(); //CLOSE CONNECTION WITH THE DB
+         console.log("DB Result :", result); //LOGGING IT!
+         //ALL THE CODE IN THIS ANNONYMOUS FUNCTION IS THE CALLBACK IN THE INSERTDOCUMENT FUNCTION
+         res.send('');
+     });
+   })
+});
+
+
 //****** Type curl -d '{"MyKey":"Me"}' -H "Content-Type: application/json" http://127.0.0.1:3000/itinerary into terminal. ****//
 
 /* GET home page. */
