@@ -59,12 +59,12 @@ router.post('/itinerary', function(req, res){
 
 
 //getting info from the database
-router.get('/adddata', function(req, res) { //RETURN JSON OF INTINERARIES
+router.get('/submit', function(req, res) { //RETURN JSON OF INTINERARIES
    var datab = req.db; //ADDS THIS DB TO ALL THE INCOMING REQUEST OBJECTS
    var collection = datab.get('collegelist');
 });
 
-router.post('/adddata', function(req, res) {
+router.post('/submit', function(req, res) {
     req.body['name'] = req.body.name;
     console.log("Submit req.body: " + req.body);
     MongoClient.connect(url, function(err, db) { //MONGO CLIENT IS CONNECTING TO THE URL -- TWO POSSIBLE OUTCOMES: ERROR OR THE DB

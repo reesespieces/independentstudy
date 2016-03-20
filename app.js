@@ -59,7 +59,7 @@ app.use('/markers', markers);
 app.use('/itinerary', routes);
 app.use('search', routes); //ROUTE FOR SEARCH IS IN INDEX.JS
 
-app.use('/adddata', routes); //ROUTE FOR SUBMITTING
+app.use('/submit', routes); //ROUTE FOR SUBMITTING
 
 
 // catch 404 and forward to error handler
