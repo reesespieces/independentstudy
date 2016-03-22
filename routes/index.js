@@ -145,27 +145,25 @@ var db = mongoclient.db('db');
 
 
 router.post('/submit', function(req, res){
-  var MongoClient = require('mongodb').MongoClient;
+  /*var MongoClient = require('mongodb').MongoClient;
   var assert = require('assert');
   var ObjectId = require('mongodb').ObjectID;
-  var url = 'mongodb://dbuser2:sillydoo@ds059195.mlab.com:59195/heroku_vmz14q76';
-
+  var url = 'mongodb://localhost:27017/maptest'; //'mongodb://dbuser2:sillydoo@ds059195.mlab.com:59195/heroku_vmz14q76';
+*/
   var insertDocument = function(db, callback) {
     db.collection('collegelist').insertOne( {
        "name" : req.body.name,
        "latitude": req.body.latitude,
        "longitude": -req.body.longitude,
        "description": req.body.description,
-
        "dates" : {
          "date": req.body.date,
             "times": [
               req.body.times
             ]
-        }
-    ],
-    "url": req.body.url,
-    "availableSpots": req.body.availableSpots
+        },
+        "url": req.body.url,
+        "availableSpots": req.body.availableSpots
   }, function(err, result) {
      assert.equal(err, null);
      console.log("Inserted a document into the restaurants collection.");
