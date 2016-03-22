@@ -58,11 +58,13 @@ router.post('/itinerary', function(req, res){
 });
 
 
+//MY ATTEMPT AT INSERTING STUFF INTO THE DATABASE BASED ON THE FUNCTIONS ABOVE...
 //getting info from the database
-router.get('/submit', function(req, res) { //RETURN JSON OF INTINERARIES
+/*router.get('/submit', function(req, res) { //RETURN JSON OF INTINERARIES
    var datab = req.db; //ADDS THIS DB TO ALL THE INCOMING REQUEST OBJECTS
    var collection = datab.get('collegelist');
 });
+
 
 router.post('/submit', function(req, res) {
     req.body['name'] = req.body.name;
@@ -78,7 +80,99 @@ router.post('/submit', function(req, res) {
      });
    })
 });
+*/
 
+//EXAMPLE OF INSERTING A DOCUMENT INTO A MONGODB LOCALLY (ANSWER FROM MY Q ON STACKOVERFLOW)
+/*
+var router = express.Router();
+MongoClient = require('mongodb').MongoClient,
+Server = require('mongodb').Server;
+
+var mongoclient = new MongoClient(new Server("localhost", 27017));
+var db = mongoclient.db('db');
+
+ router.post('/submit', function(req, res){
+   //Retrieve data sent by the client in the post request
+   var name = req.body.name;
+   // Insert document in collection
+   db.collection('collegelist').insert({ name: name}, function(err, doc) {
+
+    if(err) throw err;
+    //Doc saved
+   });
+ });
+*/
+
+//MONGODB EXAMPLE FOR INSERTING A DOCUMENT INTO A MONGO DB:
+/*
+ var MongoClient = require('mongodb').MongoClient;
+ var assert = require('assert');
+ var ObjectId = require('mongodb').ObjectID;
+ var url = 'mongodb://localhost:27017/test';
+
+ var insertDocument = function(db, callback) {
+   db.collection('restaurants').insertOne( {
+      "address" : {
+         "street" : "2 Avenue",
+         "zipcode" : "10075",
+         "building" : "1480",
+         "coord" : [ -73.9557413, 40.7720266 ]
+      },
+      "borough" : "Manhattan",
+      "cuisine" : "Italian",
+      "grades" : [
+         {
+            "date" : new Date("2014-10-01T00:00:00Z"),
+            "grade" : "A",
+            "score" : 11
+         },
+         {
+            "date" : new Date("2014-01-16T00:00:00Z"),
+            "grade" : "B",
+            "score" : 17
+         }
+      ],
+      "name" : "Vella",
+      "restaurant_id" : "41704620"
+   }, function(err, result) {
+    assert.equal(err, null);
+    console.log("Inserted a document into the restaurants collection.");
+    callback();
+  });
+};
+*/
+
+
+
+router.post('/submit', function(req, res){
+  var MongoClient = require('mongodb').MongoClient;
+  var assert = require('assert');
+  var ObjectId = require('mongodb').ObjectID;
+  var url = 'mongodb://dbuser2:sillydoo@ds059195.mlab.com:59195/heroku_vmz14q76';
+
+  var insertDocument = function(db, callback) {
+    db.collection('collegelist').insertOne( {
+       "name" : req.body.name,
+       "latitude": req.body.latitude,
+       "longitude": -req.body.longitude,
+       "description": req.body.description,
+
+       "dates" : {
+         "date": req.body.date,
+            "times": [
+              req.body.times
+            ]
+        }
+    ],
+    "url": req.body.url,
+    "availableSpots": req.body.availableSpots
+  }, function(err, result) {
+     assert.equal(err, null);
+     console.log("Inserted a document into the restaurants collection.");
+     callback();
+   });
+  };
+});
 
 //****** Type curl -d '{"MyKey":"Me"}' -H "Content-Type: application/json" http://127.0.0.1:3000/itinerary into terminal. ****//
 
