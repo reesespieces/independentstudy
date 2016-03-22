@@ -57,6 +57,59 @@ router.post('/itinerary', function(req, res){
 })
 });
 
+/*
+//getting info from the database
+router.get('/submit', function(req, res) { //RETURN JSON OF INTINERARIES
+   var db = req.db; //ADDS THIS DB TO ALL THE INCOMING REQUEST OBJECTS
+   var collection = db.get('collegelist');
+});
+
+router.post('/submit', function(req, res){
+  var url = 'mongodb://localhost:27017/maptest'; //IDENTIFIES THE MONGO DB
+
+  function insertDocument(db, record, callback) {
+     db.collection('collegelist').insertOne(record,
+     function(err, result) {
+
+      assert.equal(err, null);
+      console.log("Inserted a document into the itinerary collection.");
+      callback(result);
+    });
+  };
+
+});
+*/
+//****** Type curl -d '{"MyKey":"Me"}' -H "Content-Type: application/json" http://127.0.0.1:3000/itinerary into terminal. ****//
+
+/* GET home page. */
+router.get('/', function(req, res, next) {
+  res.render('home', { title: 'Express'}); //, givenName: req.user.givenName
+});
+
+/* GET about us page. */
+router.get('/aboutUs', function(req, res, next) {
+  res.render('aboutUs', { title: 'Express'}); //, givenName: req.user.givenName
+});
+
+//ROUTE TO THE SEARCH JADE
+router.get('/search', stormpath.loginRequired, function(req, res) { //MUST BE LOGGED IN TO SEARCH
+ res.render('search', { username: req.user.givenName });
+});
+
+router.get('/home2', stormpath.loginRequired, function(req, res) { //MUST BE LOGGED IN TO GO TO HOME2
+ res.render('home2', { username: req.user.givenName });
+});
+
+router.get('/profile', stormpath.loginRequired, function(req, res) { //MUST BE LOGGED IN TO VIEW THE PROFILE
+ res.render('profile', { username: req.user.email });
+});
+
+module.exports = router;
+
+
+
+
+
 
 //MY ATTEMPT AT INSERTING STUFF INTO THE DATABASE BASED ON THE FUNCTIONS ABOVE...
 //getting info from the database
@@ -140,7 +193,8 @@ var db = mongoclient.db('db');
     callback();
   });
 };
-*/
+
+
 
 
 
@@ -151,10 +205,13 @@ router.post('/submit', function(req, res){
   var url = 'mongodb://localhost:27017/maptest'; //'mongodb://dbuser2:sillydoo@ds059195.mlab.com:59195/heroku_vmz14q76';
 */
   //var insertDocument = function(db, callback) {
+/*  var db = req.db;
   console.log("Attempting to insert");
+  console.log("Testing 1...");
   console.log(db);
-  console.log(db.collection('collegelist'));
-    db.collection('collegelist').insertOne( {
+  console.log("Testing2 ...");
+  console.log(db.get('collegelist'));
+    db.get('collegelist').insertOne( {
        "name" : req.body.name,
        "latitude": req.body.latitude,
        "longitude": -req.body.longitude,
@@ -176,30 +233,4 @@ router.post('/submit', function(req, res){
    console.log("Insertion attempt underway");
   //};
 });
-
-//****** Type curl -d '{"MyKey":"Me"}' -H "Content-Type: application/json" http://127.0.0.1:3000/itinerary into terminal. ****//
-
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('home', { title: 'Express'}); //, givenName: req.user.givenName
-});
-
-/* GET about us page. */
-router.get('/aboutUs', function(req, res, next) {
-  res.render('aboutUs', { title: 'Express'}); //, givenName: req.user.givenName
-});
-
-//ROUTE TO THE SEARCH JADE
-router.get('/search', stormpath.loginRequired, function(req, res) { //MUST BE LOGGED IN TO SEARCH
- res.render('search', { username: req.user.givenName });
-});
-
-router.get('/home2', stormpath.loginRequired, function(req, res) { //MUST BE LOGGED IN TO GO TO HOME2
- res.render('home2', { username: req.user.givenName });
-});
-
-router.get('/profile', stormpath.loginRequired, function(req, res) { //MUST BE LOGGED IN TO VIEW THE PROFILE
- res.render('profile', { username: req.user.email });
-});
-
-module.exports = router;
+*/
