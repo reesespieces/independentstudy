@@ -150,7 +150,10 @@ router.post('/submit', function(req, res){
   var ObjectId = require('mongodb').ObjectID;
   var url = 'mongodb://localhost:27017/maptest'; //'mongodb://dbuser2:sillydoo@ds059195.mlab.com:59195/heroku_vmz14q76';
 */
-  var insertDocument = function(db, callback) {
+  //var insertDocument = function(db, callback) {
+  console.log("Attempting to insert");
+  console.log(db);
+  console.log(db.collection('collegelist'));
     db.collection('collegelist').insertOne( {
        "name" : req.body.name,
        "latitude": req.body.latitude,
@@ -165,11 +168,13 @@ router.post('/submit', function(req, res){
         "url": req.body.url,
         "availableSpots": req.body.availableSpots
   }, function(err, result) {
+    console.log(err);
      assert.equal(err, null);
      console.log("Inserted a document into the restaurants collection.");
-     callback();
+     res.redirect('/');
    });
-  };
+   console.log("Insertion attempt underway");
+  //};
 });
 
 //****** Type curl -d '{"MyKey":"Me"}' -H "Content-Type: application/json" http://127.0.0.1:3000/itinerary into terminal. ****//
