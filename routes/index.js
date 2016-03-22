@@ -57,7 +57,7 @@ router.post('/itinerary', function(req, res){
 })
 });
 
-/*
+
 //getting info from the database
 router.get('/submit', function(req, res) { //RETURN JSON OF INTINERARIES
    var db = req.db; //ADDS THIS DB TO ALL THE INCOMING REQUEST OBJECTS
@@ -72,13 +72,34 @@ router.post('/submit', function(req, res){
      function(err, result) {
 
       assert.equal(err, null);
-      console.log("Inserted a document into the itinerary collection.");
+      console.log("Function for inserting a document.");
       callback(result);
     });
   };
 
+  req.body['name'] = req.body.name; //INSERTING THE EMAIL INTO THE FIELDS THAT ARE COLLECTED
+  req.body['latitude'] = req.body.latitude;
+  req.body['longitude'] = req.body.longitude;
+  req.body['description'] = req.body.description;
+  req.body['date'] = req.body.description;
+  req.body['times'] = req.body.times;
+  req.body['url'] = req.body.url;
+  req.body['availableSpots'] = req.body.availableSpots;
+
+   console.log("Req.body: " + req.body);
+   MongoClient.connect(url, function(err, db) { //MONGO CLIENT IS CONNECTING TO THE URL -- TWO POSSIBLE OUTCOMES: ERROR OR THE DB
+    assert.equal(null, err); //ERROR MUST BE NULL FOR THE PROGRAM TO CONTINUE
+    insertDocument(db, req.body, function(result) { //CALLING ON THE INSERTDOCUMENT FUNCTION WE DEFINED BEFORE
+      //RECORD IS CALLED REQ.BODY IN THE LINE ABOVE
+        db.close(); //CLOSE CONNECTION WITH THE DB
+        console.log("DB Result :", result); //LOGGING IT!
+        //ALL THE CODE IN THIS ANNONYMOUS FUNCTION IS THE CALLBACK IN THE INSERTDOCUMENT FUNCTION
+        res.send('');
+    });
+})
+
 });
-*/
+
 //****** Type curl -d '{"MyKey":"Me"}' -H "Content-Type: application/json" http://127.0.0.1:3000/itinerary into terminal. ****//
 
 /* GET home page. */
