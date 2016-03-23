@@ -65,7 +65,8 @@ router.get('/submit', function(req, res) { //RETURN JSON OF INTINERARIES
 });
 
 router.post('/submit', function(req, res){
-  var url = 'mongodb://localhost:27017/maptest'; //IDENTIFIES THE MONGO DB
+  //var url = 'mongodb://localhost:27017/maptest'; //IDENTIFIES THE MONGO DB
+  var url = 'mongodb://dbuser2:sillydoo@ds059195.mlab.com:59195/heroku_vmz14q76';
 
   function insertDocument(db, record, callback) {
      db.collection('collegelist').insertOne(record,
