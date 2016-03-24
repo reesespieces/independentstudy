@@ -7,9 +7,10 @@ var router = express.Router();
 var MongoClient = require('mongodb').MongoClient; //CLIENT CONNECTS TO THE DB AND MAKES REQUESTS
 var assert = require('assert'); //CHECKS THE VALUE AND IF TRUE, CONTINUES IN THE PROGRAM, IF NOT, THE PROGRAM QUITS
 var ObjectId = require('mongodb').ObjectID; //ID GENERATOR?
-var url = 'mongodb://localhost:27017/gwcfinal'; //IDENTIFIES THE MONGO DB
+//var url = 'mongodb://localhost:27017/gwcfinal'; //IDENTIFIES THE MONGO DB
 var bodyParser = require('body-parser'); //PARSES THE BODY OF THE HTTP REQUEST OBJECT -- CONVERT TO JSON OBJECT
 
+/*
 //NOW NEED TO ADD USER TO THE DADABASE RECORD. GET ROUTE TO GET THOSE
 //finding route and submitting to database (just defining function here)
 function insertDocument(db, record, callback) { //FUNCTION DEFINITION TAKES A DB, A RECORD, AND A CALLBACK FUNCTION
@@ -26,6 +27,7 @@ function insertDocument(db, record, callback) { //FUNCTION DEFINITION TAKES A DB
     //EXECUTES THE ANONYMOUS FUNCTION THAT CLOSES THE DB (IT'S WITHIN THE ROUTER.POST 'INTINERARY' BLOCK)
   });
 };
+*/
 
 //getting info from the database
 router.get('/itinerary', stormpath.loginRequired, function(req, res) { //RETURN JSON OF INTINERARIES
@@ -39,6 +41,26 @@ router.get('/itinerary', stormpath.loginRequired, function(req, res) { //RETURN 
 
 //posting info to the databse
 router.post('/itinerary', function(req, res){
+
+  var url = 'mongodb://localhost:27017/gwcfinal'; //IDENTIFIES THE MONGO DB
+
+  //NOW NEED TO ADD USER TO THE DADABASE RECORD. GET ROUTE TO GET THOSE
+  //finding route and submitting to database (just defining function here)
+  function insertDocument(db, record, callback) { //FUNCTION DEFINITION TAKES A DB, A RECORD, AND A CALLBACK FUNCTION
+    //THE DB COLLECTION = ITINERARY
+    //INSERT ANY TYPE OF RECORD THAT WE GIVE IT, EXCEPT WE ARE GIVING IT A FORM
+     db.collection('itinerary').insertOne(record, //INSERTS THE RECORD
+      //HARDCODING THE COLLECTION NAME AND TAKES TWO PARAMETERS
+     //INSERTONE IS A FUNCTION THAT TAKES TWO PARAMETERS: RECORD AND AN ANONYMOUS FUNCTION
+     function(err, result) { //TWO PARAMETERS: ERR AND RESULT. EITHER YOU'RE GOING TO GET AN ERROR OR YOU'RE GOING TO GET A RESULT
+     //THE ERROR ASSESSES WHETHER THERE IS A SECURE CONNECTION TO THE DB, IF THE PARAMENTS MATCH UP, ETC.
+      assert.equal(err, null); //ASSERTING THAT IF IF THE ERROR IS NOT NULL, THE PROGRAM STOPS. IF THE ERROR IS NULL THEN THE PROGRAM CONTINUES
+      console.log("Inserted a document into the itinerary collection."); //IF THE ASSERT PASSES, THEN THE CONSOLE.LOG LOGS THIS STATEMENT
+      callback(result); //THE FUNCTION WANTS TO KNOW IF IT SUCEEDS -- LIKE A SUCCESS MESSAGE
+      //EXECUTES THE ANONYMOUS FUNCTION THAT CLOSES THE DB (IT'S WITHIN THE ROUTER.POST 'INTINERARY' BLOCK)
+    });
+  };
+
   //console.log(req.body);
   //res.send(req.body)
   //req.body['fullName'] = req.user.fullName;
@@ -60,24 +82,26 @@ router.post('/itinerary', function(req, res){
 
 //getting info from the database
 router.get('/submit', function(req, res) { //RETURN JSON OF INTINERARIES
-   var db = req.db; //ADDS THIS DB TO ALL THE INCOMING REQUEST OBJECTS
-   var collection = db.get('collegelist');
+   var db = req.db; //Creates a variable called db, which equals the database called db (db holds the collegelist collection)
+   var collection = db.get('collegelist'); //Creates a variable called collection which accesses the collection called collegelist
 });
 
 router.post('/submit', function(req, res){
-  //var url = 'mongodb://localhost:27017/maptest'; //IDENTIFIES THE MONGO DB
-  var url = 'mongodb://dbuser2:sillydoo@ds059195.mlab.com:59195/heroku_vmz14q76';
+  var url = 'mongodb://localhost:27017/maptest'; //IDENTIFIES THE MONGO DB
+  //var url = 'mongodb://dbuser2:sillydoo@ds059195.mlab.com:59195/heroku_vmz14q76';
 
-  function insertDocument(db, record, callback) {
+  function insertDocument(db, record, callback) {  //this creates a function to insert data into collegelist
      db.collection('collegelist').insertOne(record,
      function(err, result) {
 
-      assert.equal(err, null);
+      assert.equal(err, null); //error must equal null
       console.log("Function for inserting a document.");
-      callback(result);
+
+      callback(result); //calling back on the result?
     });
   };
 
+  //this grabs the data from the form using ids and assigns it to the parameters in the collegelist database
   req.body['name'] = req.body.name; //INSERTING THE EMAIL INTO THE FIELDS THAT ARE COLLECTED
   req.body['latitude'] = req.body.latitude;
   req.body['longitude'] = req.body.longitude;
@@ -88,16 +112,22 @@ router.post('/submit', function(req, res){
   req.body['availableSpots'] = req.body.availableSpots;
 
    console.log("Req.body: " + req.body);
+
+   //connects to the mongodatabase (the variable url equals the database -- either mongolab or local)
    MongoClient.connect(url, function(err, db) { //MONGO CLIENT IS CONNECTING TO THE URL -- TWO POSSIBLE OUTCOMES: ERROR OR THE DB
     assert.equal(null, err); //ERROR MUST BE NULL FOR THE PROGRAM TO CONTINUE
-    insertDocument(db, req.body, function(result) { //CALLING ON THE INSERTDOCUMENT FUNCTION WE DEFINED BEFORE
+    insertDocument(db, req.body, function(result) { //this calls on the insert document function I just created
       //RECORD IS CALLED REQ.BODY IN THE LINE ABOVE
         db.close(); //CLOSE CONNECTION WITH THE DB
         console.log("DB Result :", result); //LOGGING IT!
         //ALL THE CODE IN THIS ANNONYMOUS FUNCTION IS THE CALLBACK IN THE INSERTDOCUMENT FUNCTION
-        res.send('');
+        //res.send('');
+        res.redirect('/search');
     });
 })
+
+//res.redirect('/search');
+//res.render('search', { username: req.user.givenName });
 
 });
 
