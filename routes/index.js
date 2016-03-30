@@ -42,8 +42,8 @@ router.get('/itinerary', stormpath.loginRequired, function(req, res) { //RETURN 
 //posting info to the databse
 router.post('/itinerary', function(req, res){
 
-  //var url = 'mongodb://localhost:27017/gwcfinal'; //IDENTIFIES THE MONGO DB
-  var url = 'mongodb://dbuser2:sillydoo@ds059195.mlab.com:59195/heroku_vmz14q76';
+  var url = 'mongodb://localhost:27017/gwcfinal'; //IDENTIFIES THE MONGO DB
+  //var url = 'mongodb://dbuser2:sillydoo@ds059195.mlab.com:59195/heroku_vmz14q76';
 
   //NOW NEED TO ADD USER TO THE DADABASE RECORD. GET ROUTE TO GET THOSE
   //finding route and submitting to database (just defining function here)
@@ -88,8 +88,8 @@ router.get('/submit', function(req, res) { //RETURN JSON OF INTINERARIES
 });
 
 router.post('/submit', function(req, res){
-  //var url = 'mongodb://localhost:27017/maptest'; //IDENTIFIES THE MONGO DB
-  var url = 'mongodb://dbuser2:sillydoo@ds059195.mlab.com:59195/heroku_vmz14q76';
+  var url = 'mongodb://localhost:27017/maptest'; //IDENTIFIES THE MONGO DB
+  //var url = 'mongodb://dbuser2:sillydoo@ds059195.mlab.com:59195/heroku_vmz14q76';
 
   function insertDocument(db, record, callback) {  //this creates a function to insert data into collegelist
      db.collection('collegelist').insertOne(record,
@@ -107,10 +107,29 @@ router.post('/submit', function(req, res){
   req.body['latitude'] = req.body.latitude;
   req.body['longitude'] = req.body.longitude;
   req.body['description'] = req.body.description;
+
+/*
+"description": "The University of Arizona is a public research university located in Tucson, Arizona, United States.",
+    "dates": [
+        {
+            "date": "8/29/2015",
+            "times": [
+                "10:00am",
+                "12:00pm",
+                "4:00pm"
+            ]
+        }
+    ],
+    "url": "http://www.arizona.edu"
+}
+*/
+
+
+  //req.body['dates'] = [ { 'date' : req.body.date, 'times' : [req.body.times] } ]
   req.body['date'] = req.body.description;
   req.body['times'] = req.body.times;
+
   req.body['url'] = req.body.url;
-  req.body['availableSpots'] = req.body.availableSpots;
 
    console.log("Req.body: " + req.body);
 
