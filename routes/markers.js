@@ -7,7 +7,7 @@ router.get('/', function(req, res, next) {
 });
 
 //GET markerlist
-router.get('/markerlist', function(req, res) { //route: /markerlist
+router.get('/search', function(req, res) { //route: /markerlist
     var db = req.db;
     var collection = db.get('collegelist');
     collection.find({},{},function(e,docs){
