@@ -126,7 +126,7 @@ router.post('/submit', function(req, res){
 
 
   //req.body['dates'] = [ { 'date' : req.body.date, 'times' : [req.body.times] } ]
-  req.body['date'] = req.body.description;
+  req.body['date'] = req.body.date;
   req.body['times'] = req.body.times;
 
   req.body['url'] = req.body.url;
