@@ -122,12 +122,14 @@ router.post('/submit', function(req, res){
 
   req.body['url'] = req.body.url;
 
+  //req.body['availableSpots'] = req.body.availableSpots;
+
    console.log("Req.body: " + req.body);
 
    //connects to the mongodatabase (the variable url equals the database -- either mongolab or local)
    MongoClient.connect(url, function(err, db) { //MONGO CLIENT IS CONNECTING TO THE URL -- TWO POSSIBLE OUTCOMES: ERROR OR THE DB
     assert.equal(null, err); //ERROR MUST BE NULL FOR THE PROGRAM TO CONTINUE
-    insertDocument(db, req.body, function(result) { //this calls on the insert document function I just created
+    insertDocument(db, newCollegeListing, function(result) { //this calls on the insert document function I just created
       //RECORD IS CALLED REQ.BODY IN THE LINE ABOVE
         db.close(); //CLOSE CONNECTION WITH THE DB
         console.log("DB Result :", result); //LOGGING IT!
