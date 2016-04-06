@@ -101,6 +101,14 @@ router.post('/submit', function(req, res){
       callback(result); //calling back on the result?
     });
   };
+  var newCollegeListing = {
+    'name' : req.body.name,
+    'latitude' : req.body.latitude,
+    'longitude' : req.body.longitude,
+    'description' : req.body.description,
+    'dates' : [ { 'date' : req.body.date, 'times' : req.body.times.split(' ') } ],
+    'url' : req.body.url
+  }
 
   //this grabs the data from the form using ids and assigns it to the parameters in the collegelist database
   req.body['name'] = req.body.name; //INSERTING THE EMAIL INTO THE FIELDS THAT ARE COLLECTED
@@ -108,24 +116,7 @@ router.post('/submit', function(req, res){
   req.body['longitude'] = req.body.longitude;
   req.body['description'] = req.body.description;
 
-/*
-"description": "The University of Arizona is a public research university located in Tucson, Arizona, United States.",
-    "dates": [
-        {
-            "date": "8/29/2015",
-            "times": [
-                "10:00am",
-                "12:00pm",
-                "4:00pm"
-            ]
-        }
-    ],
-    "url": "http://www.arizona.edu"
-}
-*/
-
-
-  //req.body['dates'] = [ { 'date' : req.body.date, 'times' : [req.body.times] } ]
+  //req.body['dates'] = [ { 'date' : req.body.date, 'times' : req.body.times.split(' ') } ]; // TODO: Investigate controls for entering times as tokens in an input
   req.body['date'] = req.body.date;
   req.body['times'] = req.body.times;
 
