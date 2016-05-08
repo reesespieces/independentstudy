@@ -26,7 +26,8 @@ var markers = require('./routes/markers');
 var app = express();
 //INTIALIZE STORMPATH
 app.use(stormpath.init(app, {
-    apiKeyFile: './apiKey-7FM6JP76GUFNTLLN6343W759L.properties', //PERSONALIZED API KEY FILE
+    //apiKeyFile: './apiKey-7FM6JP76GUFNTLLN6343W759L.properties', //PERSONALIZED API KEY FILE
+    apiKeyFile: './apiKey-3PV0KQ29DWH3BMJAI6XIP0EM7.properties',
     application: process.env.STORMPATH_URL, //CORRESPONDS WITH PACKAGE.JSON
     secretKey: 'lkju8osflij234awn2ouhg982noidjv0912u843nkjndslgiou2398734p209jhsafjp92180kjv', //RANDOM STRING
 }));
@@ -93,6 +94,10 @@ app.use(function(err, req, res, next) {
   });
 });
 
+
+app.get('/college', stormpath.groupsRequired(['college']), function (req, res) {
+  res.send('If you can see this page, you must be in the `admins` group!');
+});
 
 
 

@@ -6,7 +6,7 @@
   },
   "private": true,
   "scripts": {
-    "start": "STORMPATH_URL=https://api.stormpath.com/v1/applications/oW9jvUhRi4c3QUM6h5mhX node ./bin/www"
+    "start": "STORMPATH_URL=https://api.stormpath.com/v1/applications/3hPhRabn4Mi9Xe3OGS0tsW node ./bin/www"
   },
   "dependencies": {
     "bcryptjs": "^2.3.0",

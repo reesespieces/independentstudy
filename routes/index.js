@@ -87,6 +87,7 @@ router.get('/submit', function(req, res) { //RETURN JSON OF INTINERARIES
    var collection = db.get('collegelist'); //Creates a variable called collection which accesses the collection called collegelist
 });
 
+//Submits the form to the MONGOLAB DB
 router.post('/submit', function(req, res){
   //var url = 'mongodb://localhost:27017/maptest'; //IDENTIFIES THE MONGO DB
   var url = 'mongodb://dbuser2:sillydoo@ds059195.mlab.com:59195/heroku_vmz14q76';
@@ -106,7 +107,7 @@ router.post('/submit', function(req, res){
     'latitude' : req.body.latitude,
     'longitude' : req.body.longitude,
     'description' : req.body.description,
-    'dates' : [ { 'date' : req.body.date, 'times' : req.body.times.split(' ') } ],
+    'dates' : [ { 'date' : req.body.date, 'times' : req.body.times.split(' ') } ], // TO DO: Investigate controls for entering times as tokens in an input
     'url' : req.body.url
   }
 
@@ -116,7 +117,7 @@ router.post('/submit', function(req, res){
   req.body['longitude'] = req.body.longitude;
   req.body['description'] = req.body.description;
 
-  //req.body['dates'] = [ { 'date' : req.body.date, 'times' : req.body.times.split(' ') } ]; // TODO: Investigate controls for entering times as tokens in an input
+  //req.body['dates'] = [ { 'date' : req.body.date, 'times' : req.body.times.split(' ') } ];
   req.body['date'] = req.body.date;
   req.body['times'] = req.body.times;
 
@@ -167,6 +168,10 @@ router.get('/home2', stormpath.loginRequired, function(req, res) { //MUST BE LOG
 
 router.get('/profile', stormpath.loginRequired, function(req, res) { //MUST BE LOGGED IN TO VIEW THE PROFILE
  res.render('profile', { username: req.user.email });
+});
+
+router.get('/college', stormpath.groupsRequired(['college']), function (req, res) {
+  res.send('If you can see this page, you must be in the `college` group!');
 });
 
 module.exports = router;
