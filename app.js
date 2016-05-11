@@ -95,10 +95,5 @@ app.use(function(err, req, res, next) {
 });
 
 
-app.get('/college', stormpath.groupsRequired(['college']), function (req, res) {
-  res.send('If you can see this page, you must be in the `admins` group!');
-});
-
-
 
 module.exports = app;
