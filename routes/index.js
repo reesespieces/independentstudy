@@ -171,7 +171,8 @@ router.get('/profile', stormpath.loginRequired, function(req, res) { //MUST BE L
 });
 
 router.get('/college', stormpath.groupsRequired(['college']), function (req, res) {
-  res.send('If you can see this page, you must be in the `college` group!');
+  res.render('submit');
+  //res.send('If you can see this page, you must be in the `college` group!');
 });
 
 module.exports = router;
