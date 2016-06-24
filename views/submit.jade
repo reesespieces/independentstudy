@@ -1,0 +1,114 @@
+doctype html
+html
+  head
+    meta(name='viewport', content='initial-scale=1.0, user-scalable=no')
+    meta(charset='utf-8')
+    link(rel='shortcut icon', href='http://convertico.com/images/55d379bacba01/icon2.png')
+    title MapOurTours
+    // Our created js and css files
+    script(src='//code.jquery.com/jquery-1.10.2.js')
+    script(src='/javascripts/home.js')
+    link(rel='stylesheet', type='text/css', href='/stylesheets/search.css')
+    // Compiled and minified CSS
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css')
+    // Compiled and minified JavaScript
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js')
+    style.
+      .parallax-container {
+      height: "90px";
+      }
+    script.
+      $(document).ready(function(){
+      $('.parallax').parallax();
+      });
+  body
+    // CREATING NAV BAR
+    nav
+      .nav-wrapper.cyan
+        a(href='/', style='padding-left:30px;')
+          img.circle.responsive-img(src='images/finalprojecticon1.png', alt='backpack', style='height:60px; width:60px;')
+        a.brand-logo(href='/', style='padding-left:30px;') MapOurTours
+        ul#nav-mobile.right.hide-on-med-and-down
+          li
+            a(href='/search') Log In
+    div
+      //
+        - UNIVERSITY
+        - LATITUDE
+        - LONGITUDE
+        - DESCRIPTION
+        - DATES:
+        - DATE
+        - TIMES:
+        -
+        - URL
+        - AVAILABLE SPOTS
+      form(action='/submit', method='post')
+        // CREATE THE FORM FOR SIGNING UP
+        .row
+          form.col.s12
+            .row
+              .input-field.col.s12
+                // UNIVERSITY NAME FORM
+                input#name.validate(name='name', type='text')
+                label(for='name') University or College
+            .row
+              .input-field.col.s6
+                // LATITUDE FORM
+                input#latitude.validate(name='latitude', type='text')
+                label(for='latitude') Latitude
+              .input-field.col.s6
+                // LONGITUDE FORM
+                input#longitude.validate(name='longitude', type='text')
+                label(for='longitude') Longitude
+            .row
+              .input-field.col.s12
+                // DESCRIPTION FORM
+                input#description.validate(name='description', type='text')
+                label(for='description') Description
+            .row
+              // DATE FORM
+              .input-field.col.s6
+                input#date.validate(name='date', type='text')
+                label(for='date') Date
+              .input-field.col.s6
+                // TIMES VALIDATION
+                input#times.validate(name='times', type='text')
+                label(for='times') Times
+            .row
+              .input-field.col.s12
+                input#url.validate(name='url', type='text')
+                label(for='url') URL
+            .row
+              .input-field.col.s12
+                input#availableSpots.validate(name='url', type='text')
+                label(for='availableSpots') Available Spots
+        input(type='submit', value='Submit')
+    center
+      img(src='/images/icon3.png')
+    br
+    br
+  // FOOTER
+  footer.page-footer.cyan
+    .container.white-text.valign
+      .row
+        .col.l3.m3
+          center
+            a.grey-text.text-lighten-3(href='https://twitter.com/MapYourTour')
+              img(style='width:32px; height:32px;', src='/images/twitter.png')
+        .col.l3.m3
+          center
+            a.grey-text.text-lighten-3(href='/')
+              img(style='width:32px; height:32px;', src='/images/fb.png')
+        .col.l3.m3
+          center
+            a.grey-text.text-lighten-3(href='https://instagram.com/mapourtours/')
+              img(style='width:32px; height:32px;', src='/images/insta.png')
+        .col.l3.m3
+          center
+            a.grey-text.text-lighten-3(href='/')
+              img.circle.responsive-img(style='width:32px; height:32px;', src='/images/gitCat.jpg')
+    .footer-copyright
+      .container
+        | © 2015 Copyright MapOurTours
+        a.grey-text.text-lighten-4.right(href='/') Home
